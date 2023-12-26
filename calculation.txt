@@ -1,0 +1,15 @@
+Number 1: 12
+Number 2: 4
+Operation: /
+Result: 3.0
+-----------
+Number 1: 12
+Number 2: 4
+Operation: /
+Result: 3.0
+-----------
+Number 1: 12
+Number 2: 4
+Operation: /
+Result: 3.0
+-----------

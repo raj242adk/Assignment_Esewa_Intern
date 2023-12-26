@@ -1,8 +1,13 @@
 package org.example.calculator;
 
 import java.io.FileWriter;
+import java.io.IOException;
 import java.io.PrintWriter;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Scanner;
+
+import static jdk.jfr.consumer.EventStream.openFile;
 
 public class App {
     public static void main(String[] args) {
@@ -48,12 +53,33 @@ public class App {
                 default:
                     System.out.println("Invalid operation.");
             }
+            saveToFile(num1, num2, operation, result);
+
         } catch ( CustomeDivideByZeroException e) {
             System.out.println(e.getMessage());
         }
 
         scanner.close();
     }
+
+    private static void saveToFile(int num1, int num2, char operation, double result) {
+
+        try (PrintWriter writer = new PrintWriter(new FileWriter("D:/JAva/esewaIntern/simpleCalculator/src/main/resources/calculation.txt2", true))) {
+            writer.println("Number 1: " + num1);
+            writer.println("Number 2: " + num2);
+            writer.println("Operation: " + operation);
+            writer.println("Result: " + result);
+            writer.println("-----------");
+            // The file is automatically closed when exiting the try block
+
+            // Open the file with the default associated application
+            openFile(Paths.get("D:/JAva/esewaIntern/simpleCalculator/src/main/resources/calculation.txt"));
+        } catch (IOException e) {
+            System.out.println("Error writing to file: " + e.getMessage());
+        }
+    }
+
+
     private static boolean isValidOperation(char operation) {
         return operation == '+' || operation == '-' || operation == '*' || operation == '/';
     }
